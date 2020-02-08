@@ -8,11 +8,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class SleepController extends AbstractController
 {
     /**
-     * @Route("/sleep/{seconds}", name="sleep")
+     * @Route("/sleep/{seconds}/{throw}", name="sleep", format="json")
      */
-    public function index($seconds)
+    public function index($seconds, string $throw=null)
     {
         sleep($seconds);
+
+        if (null !== $throw) {
+            throw new \RuntimeException($throw);
+        }
 
         return $this->json([
             'message' => "I slept for '$seconds'  seconds",
