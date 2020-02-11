@@ -15,7 +15,7 @@ class SleepController extends AbstractController
         sleep($seconds);
 
         if (null !== $throw) {
-            throw new \RuntimeException($throw);
+            return $this->json(['message' => 'This is a JSON 500 response'], 500);
         }
 
         return $this->json([
